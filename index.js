@@ -2,6 +2,9 @@ const express = require("express");
 const app = express();
 const port = 5000;
 const bodyParser = require("body-parser");
+
+const config = require("./config/key");
+
 const { User } = require("./models/User");
 
 //application/x-www-form-urlencoded
@@ -11,19 +14,16 @@ app.use(bodyParser.json());
 
 const mongoose = require("mongoose");
 mongoose
-  .connect(
-    "mongodb+srv://parkmiso:qkralth12@parkmiso.ydkdt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
-    {
-      // useNewUrlParser: true,
-      // useUnifiedTopology: true,
-      // useCreateIndex: true,
-      // useFindAndModify: false,
-    }
-  )
+  .connect(config.mongoURI, {
+    // useNewUrlParser: true,
+    // useUnifiedTopology: true,
+    // useCreateIndex: true,
+    // useFindAndModify: false,
+  })
   .then(() => console.log("몽고db connected"))
   .catch((error) => console.log(error));
 
-app.get("/", (req, res) => res.send("ㅋㅋ안뇽"));
+app.get("/", (req, res) => res.send("ㅋㅋ안뇽zㅋddㅋㅋ"));
 
 app.post("/register", (req, res) => {
   //client에서 회원가입 정보 받아서 데이터베이스에 저장
